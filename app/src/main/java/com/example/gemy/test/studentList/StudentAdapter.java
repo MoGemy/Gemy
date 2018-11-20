@@ -9,21 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.gemy.test.POJO.DataItem;
-import com.example.gemy.test.POJO.Studentlist;
 import com.example.gemy.test.R;
 import com.example.gemy.test.studentProfile.StudentProfile;
+import com.google.zxing.Result;
 
 import java.util.List;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentViewHolder> {
 private Context context;
-private Studentlist studentlist;
-private List<DataItem> dataItems;
-    public   StudentAdapter (List<DataItem> dataItems,Studentlist studentlist) {
-        this.dataItems = dataItems ;
-        this.studentlist = studentlist ;
+//private Studentlist studentlist;
+//private List<DataItem> dataItems;
+   Result result;
+    public   StudentAdapter (Result result) {
+  //      this.dataItems = dataItems ;
+    //    this.studentlist = studentlist ;
+        this.result = result;
 
     }
     @NonNull
@@ -36,7 +36,7 @@ private List<DataItem> dataItems;
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder studentViewHolder, int i) {
-        studentViewHolder.studentname.setText("name"+studentlist.getName());
+        studentViewHolder.studentname.setText("name"+result.getText());
         studentViewHolder.studentid.setText("id");
         studentViewHolder.cardView.setOnClickListener(view -> {
             onItemClicked("id");
@@ -52,7 +52,7 @@ private List<DataItem> dataItems;
 
     @Override
     public int getItemCount() {
-        return dataItems.size();
+        return 0;//size of code
     }
 }
 

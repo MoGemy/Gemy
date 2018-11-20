@@ -4,25 +4,29 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.gemy.test.R;
+import com.example.gemy.test.studentList.StudentAdapter;
 import com.google.zxing.Result;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class MainActivity extends AppCompatActivity {
-    ZXingScannerView scannerView;
 
+    ZXingScannerView scannerView;
     private RxPermissions rxPermissions;
+    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+    Result result ;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
         scannerView = findViewById ( R.id.scannerView );
-
         rxPermissions = new RxPermissions ( this );
 
         scannerView.setResultHandler ( this::onQrResult );
@@ -31,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
                 .request ( Manifest.permission.CAMERA )
                 .subscribe ( this::onPermissionsResult );
 
+        StudentAdapter adaptar = new StudentAdapter(result);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adaptar);
     }
+
 
     private void onPermissionsResult( Boolean isGranted ) {
         if ( isGranted ) {
@@ -54,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
         scannerView.startCamera ();
     }
 
-    private void onQrResult( Result result ) {
-        Log.i ( "QR_RESULT" , result.getText () );
 
+    private void onQrResult(Result result) {
+        Log.i ( "QR_RESULT" , result.getText() );
+        this.result=result;
     }
+
 }

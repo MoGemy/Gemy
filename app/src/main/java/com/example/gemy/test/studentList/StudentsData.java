@@ -8,23 +8,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.example.gemy.test.APP;
 import com.example.gemy.test.NetWork.StudentApi;
-import com.example.gemy.test.POJO.DataItem;
-import com.example.gemy.test.POJO.Studentlist;
 import com.example.gemy.test.R;
-import io.reactivex.schedulers.Schedulers;
+
+import javax.xml.transform.Result;
 
 public class StudentsData extends AppCompatActivity {
-    Studentlist studentlist;
     Application application;
     RecyclerView recyclerView = findViewById(R.id.recyclerView);
     StudentApi api = ((APP) application).getApi();
     FloatingActionButton button = findViewById(R.id.call);
+    com.google.zxing.Result result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students_data);
-
+/*
         api.getStudent()
                 .map(Studentlist -> Studentlist.getData())
                 .subscribeOn(Schedulers.io())
@@ -37,9 +36,11 @@ public class StudentsData extends AppCompatActivity {
                     }
                 }, throwable -> {
                     throwable.printStackTrace();
-                });
+                });*/
         }
+
 }
+
 
 
 
